@@ -20,7 +20,7 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "Assets")));
 app.use(express.static(path.join(__dirname, "Assets/uploads")));
 
-app.get("/", (req, res) => {
+app.get("/3-w-backend-node-api.vercel.app", (req, res) => {
   res.send(
     `<h1 style="text-align: center; font-family: monospace; margin-top: 5rem; font-size: 3.5rem; color: white; text-shadow: 3px 3px 5px rgba(0,0,0,1)">WELCOME To 3W</h1>`
   );
