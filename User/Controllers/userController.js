@@ -12,11 +12,12 @@ UserController.createUser = async (req, res) => {
 
   try {
     const { name, handle } = req.body;
-    let { image } = req.files;
 
-    if (!image || image.length === 0) {
+    if (!req.files || req.files.length === 0 || req.files === null) {
       return res.status(422).json({ msg: "No Images were uploaded" });
     }
+
+    let { image } = req.files;
 
     if (!Array.isArray(image)) {
       image = [image];
@@ -34,8 +35,8 @@ UserController.createUser = async (req, res) => {
     image.forEach(async (i) => {
       let imageName = i.name;
 
-      let imagePath = `uploads/${Date.now()}/${imageName}`;
-      let imageDir = `Assets/uploads/${Date.now()}/${imageName}`;
+      let imagePath = `uploads/${user.id}/${imageName}`;
+      let imageDir = `Assets/uploads/${user.id}/${imageName}`;
 
       await singleFileUpload(imageDir, i);
       await All_Models.Image_Model.create({ imagePath, userId: user.id });
@@ -51,7 +52,13 @@ UserController.createUser = async (req, res) => {
 
 UserController.getUser = async (req, res) => {
   try {
-    const data = All_Models.User_Model.findOne();
+    const data = await All_Models.User_Model.findOne({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      include: {
+        model: All_Models.Image_Model,
+        attributes: { exclude: ["createdAt", "updatedAt"] },
+      },
+    });
 
     if (!data) {
       res.status(404).json({ msg: "No data found" });

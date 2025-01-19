@@ -48,7 +48,7 @@ const router = express.Router();
  *               handle:
  *                 type: string
  *                 description: Handle for the user
- *               files:
+ *               image:
  *                 type: array
  *                 items:
  *                   type: string
