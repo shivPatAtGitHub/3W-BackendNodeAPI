@@ -61,12 +61,12 @@ UserController.createUser = async (req, res) => {
 
 UserController.getUser = async (req, res) => {
   try {
-    const data = await All_Models.User_Model.findOne({
+    const data = await All_Models.User_Model.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: {
-        model: All_Models.Image_Model,
-        attributes: { exclude: ["createdAt", "updatedAt"] },
-      },
+      // include: {
+      //   model: All_Models.Image_Model,
+      //   attributes: { exclude: ["createdAt", "updatedAt"] },
+      // },
     });
 
     if (!data) {
@@ -74,7 +74,7 @@ UserController.getUser = async (req, res) => {
     }
 
     return res.status(200).json({
-      msg: "Fetched New User successfully",
+      msg: "Fetched All Users successfully",
       data,
     });
   } catch (error) {

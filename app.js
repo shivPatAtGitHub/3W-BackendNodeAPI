@@ -7,6 +7,7 @@ import relations from "./Utils/relations.js";
 import path from "path";
 import allUserRoutes from "./Utils/allUserRoutes.js";
 import { swaggerConfig } from "./swagger.js";
+import allAdminRoutes from "./Utils/allAdminRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 
 relations(app);
 allUserRoutes(app);
+allAdminRoutes(app);
 
 swaggerConfig(app);
 
