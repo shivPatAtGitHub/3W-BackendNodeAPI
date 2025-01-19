@@ -23,13 +23,20 @@ UserController.createUser = async (req, res) => {
       image = [image];
     }
 
-    const user = await All_Models.User_Model.create({
-      name,
-      handle,
+    let userFlag = false;
+
+    let user = await All_Models.User_Model.findOne({
+      where: {
+        name,
+      },
     });
 
     if (!user) {
-      return res.status(422).json({ msg: "Error creating User" });
+      user = await All_Models.User_Model.create({
+        name,
+        handle,
+      });
+      userFlag = true;
     }
 
     image.forEach(async (i) => {
@@ -43,7 +50,9 @@ UserController.createUser = async (req, res) => {
     });
 
     return res.status(200).json({
-      msg: "Added User succesfully",
+      msg: userFlag
+        ? "Added User succesfully"
+        : "Updated User Data successfully",
     });
   } catch (error) {
     return res.status(500).json(error.message);
@@ -65,7 +74,7 @@ UserController.getUser = async (req, res) => {
     }
 
     return res.status(200).json({
-      msg: "Fetched User successfully",
+      msg: "Fetched New User successfully",
       data,
     });
   } catch (error) {
