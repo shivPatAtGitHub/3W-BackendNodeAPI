@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import relations from "./Utils/relations.js";
 import path from "path";
+import allUserRoutes from "./Utils/allUserRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 relations(app);
+allUserRoutes(app);
 
 dbConnect.sync().then(() => {
   console.log(`Connected To Database`);

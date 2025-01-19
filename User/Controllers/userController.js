@@ -1,8 +1,8 @@
 import { validationResult } from "express-validator";
-import All_Models from "../../Utils/allModels";
-import { singleFileUpload } from "../Middlewares/fileUpload";
+import All_Models from "../../Utils/allModels.js";
+import { singleFileUpload } from "../Middlewares/fileUpload.js";
 
-const UserController = {};
+export const UserController = {};
 
 UserController.createUser = async (req, res) => {
   const errors = validationResult(req);
@@ -43,6 +43,23 @@ UserController.createUser = async (req, res) => {
 
     return res.status(200).json({
       msg: "Added User succesfully",
+    });
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
+UserController.getUser = async (req, res) => {
+  try {
+    const data = All_Models.User_Model.findOne();
+
+    if (!data) {
+      res.status(404).json({ msg: "No data found" });
+    }
+
+    return res.status(200).json({
+      msg: "Fetched User successfully",
+      data,
     });
   } catch (error) {
     return res.status(500).json(error.message);
