@@ -1,5 +1,5 @@
 import User_Model from "../Models/users.js";
-import Image_Model from "../Models/Image.js";
+import Image_Model from "../Models/image.js";
 import Admin_Model from "../Models/admin.js";
 
 const All_Models = {
