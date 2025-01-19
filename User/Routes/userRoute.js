@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /getUser:
+ * /user/getUser:
  *   get:
  *     tags:
  *       - User
@@ -30,7 +30,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /addUser:
+ * /user/addUser:
  *   post:
  *     tags:
  *       - User
