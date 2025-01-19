@@ -4,6 +4,7 @@ import dbConnect from "./Utils/dbconnection.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import relations from "./Utils/relations.js";
+import path from "path";
 dotenv.config();
 
 const app = express();
@@ -11,6 +12,10 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "Assets")));
+app.use(express.static(path.join(__dirname, "Assets/uploads")));
 
 app.get("/", (req, res) => {
   res.send(
