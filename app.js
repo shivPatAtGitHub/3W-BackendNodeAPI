@@ -36,6 +36,6 @@ dbConnect.sync().then(() => {
   console.log(`Connected To Database`);
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`Server live - ${process.env.PORT}`);
 });
