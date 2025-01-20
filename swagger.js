@@ -15,7 +15,7 @@ const createSwaggerSpec = (apiPaths) => {
           description: "Development server",
         },
         {
-          url: "https://api.3w.in",
+          url: "https://api-3w-social-media-backend.netlify.app",
           description: "Live server",
         },
       ],
